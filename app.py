@@ -12,7 +12,14 @@ MODEL = "qwen/qwen3.8-27b"
 
 @app.route('/', methods=['GET'])
 def index():
-    return jsonify({"status": "API is running!"})
+    return jsonify({"status": "API is running!", "view_image": "/latest-image"})
+
+@app.route('/latest-image', methods=['GET'])
+def latest_image():
+    if os.path.exists("latest.jpg"):
+        from flask import send_file
+        return send_file("latest.jpg", mimetype='image/jpeg')
+    return "No image captured yet!", 404
 
 @app.route('/classify', methods=['POST'])
 def classify():
@@ -22,7 +29,11 @@ def classify():
     image_file = request.files['image']
     image_data = image_file.read()
 
-    # Convert to base64
+    # Save the latest image so the user can view it in the browser
+    with open("latest.jpg", "wb") as f:
+        f.write(image_data)
+
+    # Convert to base64 for Groq
     b64_image = base64.b64encode(image_data).decode('utf-8')
 
     # Prepare Groq Payload
