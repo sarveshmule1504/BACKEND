@@ -46,7 +46,7 @@ def classify():
                 "content": [
                     {
                         "type": "text",
-                        "text": "Classify this waste into one of 4 categories: 1 for Hybrid, 2 for Sharp, 3 for Biodegradable, 4 for Infectious. Reply ONLY with the number (1, 2, 3, or 4)."
+                        "text": "You are a medical waste sorting AI. Classify the item in the image into exactly one category:\n1 - Hybrid (Mixed materials, plastic + metal, medicine tubes, wrappers, general packaging)\n2 - Sharp (Needles, syringes, scalpels, broken glass, sharp metals)\n3 - Biodegradable (Food waste, paper, cotton, organic matter, leaves)\n4 - Infectious (Blood-soaked bandages, biohazards, used medical gloves/masks)\n\nReply ONLY with the single digit (1, 2, 3, or 4). Do not write any other text."
                     },
                     {
                         "type": "image_url",
